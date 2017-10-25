@@ -18,6 +18,7 @@ export class ContainerProvider {
 
   constructor(public http: Http) {
     console.log('Hello ContainerProvider Provider');
+  
   }
 
   getContainers(): Promise<Container[]> {
@@ -28,11 +29,22 @@ export class ContainerProvider {
   }
 
   getContainer(id: number): Promise<Container> {
-    return this.getContainers()
-                .then(containers => containers.find(container => container.id === id));
+    let url = this.containerApiUrl + "?id=" + id
+    return this.http.get(url)
+                .toPromise()
+                .then(response => response.json().data as Container)
+                .catch(this.handleError);
   }
-  
 
+  getOwnerContainers(id_owner: number): Promise<Container[]> {
+    let url = this.containerApiUrl + "?id_owner=" + id_owner
+    return this.http.get(url)
+                .toPromise()
+                .then(response => response.json().data as Container[])
+                .catch(this.handleError);
+  }
+
+  
   private handleError(error: any): Promise<any> {
     console.error('An error occurred', error); // for demo purposes only
     return Promise.reject(error.message || error);

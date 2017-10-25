@@ -5,6 +5,7 @@ import 'rxjs/add/operator/toPromise';
 
 import { Container } from '../../app/container'
 import { Member } from '../../app/member'
+import { Port } from '../../app/port'
 
 /*
   Generated class for the MemberProvider provider.
@@ -21,13 +22,6 @@ export class MemberProvider {
     console.log('Hello MemberProvider Provider');
   }
 
-  getOwnerContainers(id_owner: number): Promise<Container[]> {
-    return this.http.get(this.memberApiUrl)
-                .toPromise()
-                .then(response => response.json().data as Container[])
-                .catch(this.handleError);
-  }
-
   getMembers(): Promise<Member[]> {
     return this.http.get(this.memberApiUrl)
                 .toPromise()
@@ -36,7 +30,7 @@ export class MemberProvider {
   }
 
   getMember(id: number): Promise<Member> {
-    return this.getMember()
+    return this.getMembers()
                 .then(containers => containers.find(container => container.id === id));
   }
 
@@ -44,5 +38,7 @@ export class MemberProvider {
     console.error('An error occurred', error); // for demo purposes only
     return Promise.reject(error.message || error);
   }
+
+  
 
 }

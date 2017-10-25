@@ -13,6 +13,11 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { ContainerProvider } from '../providers/container/container';
 import { MemberProvider } from '../providers/member/member';
 
+import { HttpModule }    from '@angular/http';
+import { PortProvider } from '../providers/port/port';
+
+
+
 @NgModule({
   declarations: [
     MyApp,
@@ -38,7 +43,8 @@ import { MemberProvider } from '../providers/member/member';
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     ContainerProvider,
-    MemberProvider
+    MemberProvider,
+    PortProvider
   ]
 })
 export class AppModule {}

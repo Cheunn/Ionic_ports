@@ -6,4 +6,5 @@ export class Container {
     date_departure: Date;
     owner_id: number;
     expeditor_id: number;
+    type: string;
    }
