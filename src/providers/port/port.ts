@@ -42,5 +42,13 @@ export class PortProvider {
                 .catch(this.handleError);
   }
 
+  getPort(id:number): Promise<Port>{
+    let url = this.portApiUrl + "?id=" + id
+    return this.http.get(url)
+                    .toPromise()
+                    .then(response => response.json().data as Port)
+                    .catch(this.handleError);
+  }
+
 
 }
